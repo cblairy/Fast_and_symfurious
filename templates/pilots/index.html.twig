@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pilots index{% endblock %}
+
+{% block body %}
+    <h1>Pilots index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Name</th>
+                <th>Nationality</th>
+                <th>FuriousSkill</th>
+                <th>Avatar</th>
+                <th>Wallet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pilot in pilots %}
+            <tr>
+                <td>{{ pilot.id }}</td>
+                <td>{{ pilot.firstname }}</td>
+                <td>{{ pilot.name }}</td>
+                <td>{{ pilot.nationality }}</td>
+                <td>{{ pilot.furiousSkill }}</td>
+                <td>{{ pilot.avatar }}</td>
+                <td>{{ pilot.wallet }}</td>
+                <td>
+                    <a href="{{ path('app_pilots_show', {'id': pilot.id}) }}">show</a>
+                    <a href="{{ path('app_pilots_edit', {'id': pilot.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pilots_new') }}">Create new</a>
+{% endblock %}
