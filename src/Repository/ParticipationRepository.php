@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Pilots;
+use App\Entity\Participation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Pilots>
+ * @extends ServiceEntityRepository<Participation>
  *
- * @method Pilots|null find($id, $lockMode = null, $lockVersion = null)
- * @method Pilots|null findOneBy(array $criteria, array $orderBy = null)
- * @method Pilots[]    findAll()
- * @method Pilots[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Participation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Participation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Participation[]    findAll()
+ * @method Participation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PilotsRepository extends ServiceEntityRepository
+class ParticipationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Pilots::class);
+        parent::__construct($registry, Participation::class);
     }
 
-    public function add(Pilots $entity, bool $flush = false): void
+    public function add(Participation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class PilotsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Pilots $entity, bool $flush = false): void
+    public function remove(Participation $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class PilotsRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Pilots[] Returns an array of Pilots objects
+//     * @return Participation[] Returns an array of Participation objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class PilotsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Pilots
+//    public function findOneBySomeField($value): ?Participation
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

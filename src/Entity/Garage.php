@@ -23,9 +23,9 @@ class Garage
     private $is_out;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Cars::class)
+     * @ORM\ManyToOne(targetEntity=Car::class)
      */
-    private $fkCars;
+    private $Cars;
 
     public function getId(): ?int
     {
@@ -44,14 +44,14 @@ class Garage
         return $this;
     }
 
-    public function getFkCars(): ?Cars
+    public function getCars(): ?Car
     {
-        return $this->fkCars;
+        return $this->Cars;
     }
 
-    public function setFkCars(?Cars $fkCars): self
+    public function setCars(?Car $Cars): self
     {
-        $this->fkCars = $fkCars;
+        $this->Cars = $Cars;
 
         return $this;
     }

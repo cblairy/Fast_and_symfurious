@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CarsRepository;
+use App\Repository\CarRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CarsRepository::class)
+ * @ORM\Entity(repositoryClass=CarRepository::class)
  */
-class Cars
+class Car
 {
     /**
      * @ORM\Id
@@ -28,7 +28,7 @@ class Cars
     private $model;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="float")
      */
     private $cylinder;
 
@@ -41,6 +41,11 @@ class Cars
      * @ORM\Column(type="integer")
      */
     private $estimatedValue;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Pilot::class, mappedBy="fkCar", cascade={"persist", "remove"})
+     */
+    private $pilot;
 
     public function getId(): ?int
     {
@@ -71,12 +76,12 @@ class Cars
         return $this;
     }
 
-    public function getCylinder(): ?string
+    public function getCylinder(): ?float
     {
         return $this->cylinder;
     }
 
-    public function setCylinder(string $cylinder): self
+    public function setCylinder(float $cylinder): self
     {
         $this->cylinder = $cylinder;
 
@@ -103,6 +108,28 @@ class Cars
     public function setEstimatedValue(int $estimatedValue): self
     {
         $this->estimatedValue = $estimatedValue;
+
+        return $this;
+    }
+
+    public function getPilot(): ?Pilot
+    {
+        return $this->pilot;
+    }
+
+    public function setPilot(?Pilot $pilot): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($pilot === null && $this->pilot !== null) {
+            $this->pilot->setFkCar(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($pilot !== null && $pilot->getFkCar() !== $this) {
+            $pilot->setFkCar($this);
+        }
+
+        $this->pilot = $pilot;
 
         return $this;
     }

@@ -10,8 +10,12 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_row(registrationForm.nationality) }}
+        {{ form_row(registrationForm.drivingSkills) }}
+        {{ form_row(registrationForm.photogenicSkills) }}
+
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
+</div>
