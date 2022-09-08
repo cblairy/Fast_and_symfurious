@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ParticipationRepository;
+use App\Repository\ChampionshipRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ParticipationRepository::class)
+ * @ORM\Entity(repositoryClass=ChampionshipRepository::class)
  */
-class Participation
+class Championship
 {
     /**
      * @ORM\Id
@@ -23,16 +23,16 @@ class Participation
     private $score;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="participations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $races;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Pilot::class, inversedBy="participation", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Pilot::class, inversedBy="championships")
      * @ORM\JoinColumn(nullable=false)
      */
     private $pilots;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Race::class, inversedBy="championships")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $races;
 
     public function getId(): ?int
     {
@@ -51,6 +51,18 @@ class Participation
         return $this;
     }
 
+    public function getPilots(): ?Pilot
+    {
+        return $this->pilots;
+    }
+
+    public function setPilots(?Pilot $pilots): self
+    {
+        $this->pilots = $pilots;
+
+        return $this;
+    }
+
     public function getRaces(): ?Race
     {
         return $this->races;
@@ -59,18 +71,6 @@ class Participation
     public function setRaces(?Race $races): self
     {
         $this->races = $races;
-
-        return $this;
-    }
-
-    public function getPilots(): ?Pilot
-    {
-        return $this->pilots;
-    }
-
-    public function setPilots(Pilot $pilots): self
-    {
-        $this->pilots = $pilots;
 
         return $this;
     }

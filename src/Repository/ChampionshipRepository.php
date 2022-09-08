@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Circuit;
+use App\Entity\Championship;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Circuit>
+ * @extends ServiceEntityRepository<Championship>
  *
- * @method Circuit|null find($id, $lockMode = null, $lockVersion = null)
- * @method Circuit|null findOneBy(array $criteria, array $orderBy = null)
- * @method Circuit[]    findAll()
- * @method Circuit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Championship|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Championship|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Championship[]    findAll()
+ * @method Championship[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CircuitRepository extends ServiceEntityRepository
+class ChampionshipRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Circuit::class);
+        parent::__construct($registry, Championship::class);
     }
 
-    public function add(Circuit $entity, bool $flush = false): void
+    public function add(Championship $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class CircuitRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Circuit $entity, bool $flush = false): void
+    public function remove(Championship $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class CircuitRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Circuit[] Returns an array of Circuit objects
+//     * @return Championship[] Returns an array of Championship objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class CircuitRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Circuit
+//    public function findOneBySomeField($value): ?Championship
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

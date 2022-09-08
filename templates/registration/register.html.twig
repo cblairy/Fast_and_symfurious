@@ -5,17 +5,71 @@
 {% block body %}
     <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.nationality) }}
-        {{ form_row(registrationForm.drivingSkills) }}
-        {{ form_row(registrationForm.photogenicSkills) }}
+    {{ form_start(registrationForm) }} 
+        <div class="col">
+            {{ form_label(registrationForm.username, null, {
+                    'label': 'Username',
+            }) }}
+            {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+            {# {{ form_row(registrationForm.username) }}  #}
+            {{ form_help(registrationForm.username) }}
+        </div>
 
 
-        <button type="submit" class="btn">Register</button>
+        <div class="col">
+            {{ form_label(registrationForm.plainPassword, null, {
+                    'label': 'Password',
+            }) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+            {{ form_help(registrationForm.plainPassword) }}
+        </div>
+
+
+        <div class="col">
+            {{ form_label(registrationForm.nationality, null, {
+                    'label': 'Nationality',
+            }) }}
+            {{ form_widget(registrationForm.nationality, {'attr': {'class': 'form-control'}}) }}
+            {{ form_help(registrationForm.nationality) }}
+        </div>
+
+
+        <div class="col">
+            {{ form_label(registrationForm.drivingSkills, null, {
+                    'label': 'Your driving skills',
+            }) }}
+            {{ form_widget(registrationForm.drivingSkills, {'attr': {'class': 'form-range'}}) }}
+            {{ form_help(registrationForm.drivingSkills) }}
+        </div>
+
+
+        <div class="col">
+            {{ form_label(registrationForm.photogenicSkills, null, {
+                    'label': 'Your photogenic talents',
+            }) }}
+            {{ form_widget(registrationForm.photogenicSkills, {'attr': {'class': 'form-range'}}) }}
+            {{ form_help(registrationForm.photogenicSkills) }}
+        </div>
+
+
+        <div class="col">
+            {{ form_label(registrationForm.avatar, null, {
+                    'label': 'Avatar (optional)',
+            }) }}
+            {{ form_widget(registrationForm.avatar, {'attr': {'class': 'form-control'}}) }}
+            {{ form_help(registrationForm.avatar) }}
+        </div>
+
+
+        <div class="col">
+            {{ form_label(registrationForm.wallet, null, {
+                    'label': 'Your available funds ($)',
+            }) }}
+            {{ form_widget(registrationForm.wallet, {'attr': {'class': 'form-control'}}) }}
+            {{ form_help(registrationForm.wallet) }}
+        </div>
+
+        <button type="submit" class="btn btn-success">Register</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
-</div>
+

@@ -35,18 +35,35 @@ class Race
     private $endGrid = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Participation::class, mappedBy="races")
+     * @ORM\Column(type="string", length=255)
      */
-    private $participations;
+    private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Tournament::class, inversedBy="races")
+     * @ORM\Column(type="integer")
      */
-    private $tournament;
+    private $length;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $difficulty;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Championship::class, mappedBy="races")
+     */
+    private $championships;
+
+   
 
     public function __construct()
     {
-        $this->participations = new ArrayCollection();
+        $this->championships = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,45 +107,83 @@ class Race
         return $this;
     }
 
-    /**
-     * @return Collection<int, Participation>
-     */
-    public function getParticipations(): Collection
+    public function getName(): ?string
     {
-        return $this->participations;
+        return $this->name;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function setName(string $name): self
     {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setRaces($this);
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLength(): ?int
+    {
+        return $this->length;
+    }
+
+    public function setLength(int $length): self
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    public function getDifficulty(): ?int
+    {
+        return $this->difficulty;
+    }
+
+    public function setDifficulty(int $difficulty): self
+    {
+        $this->difficulty = $difficulty;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Championship>
+     */
+    public function getChampionships(): Collection
+    {
+        return $this->championships;
+    }
+
+    public function addChampionship(Championship $championship): self
+    {
+        if (!$this->championships->contains($championship)) {
+            $this->championships[] = $championship;
+            $championship->setRaces($this);
         }
 
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function removeChampionship(Championship $championship): self
     {
-        if ($this->participations->removeElement($participation)) {
+        if ($this->championships->removeElement($championship)) {
             // set the owning side to null (unless already changed)
-            if ($participation->getRaces() === $this) {
-                $participation->setRaces(null);
+            if ($championship->getRaces() === $this) {
+                $championship->setRaces(null);
             }
         }
 
         return $this;
     }
 
-    public function getTournament(): ?Tournament
-    {
-        return $this->tournament;
-    }
 
-    public function setTournament(?Tournament $tournament): self
-    {
-        $this->tournament = $tournament;
-
-        return $this;
-    }
 }

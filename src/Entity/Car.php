@@ -43,9 +43,18 @@ class Car
     private $estimatedValue;
 
     /**
-     * @ORM\OneToOne(targetEntity=Pilot::class, mappedBy="fkCar", cascade={"persist", "remove"})
+     * @ORM\Column(type="boolean")
+     */
+    private $isBroken;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Pilot::class, mappedBy="car", cascade={"persist", "remove"})
      */
     private $pilot;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Pilot::class, mappedBy="fkCar", cascade={"persist", "remove"})
+     */
 
     public function getId(): ?int
     {
@@ -117,16 +126,23 @@ class Car
         return $this->pilot;
     }
 
-    public function setPilot(?Pilot $pilot): self
+    public function isIsBroken(): ?bool
     {
-        // unset the owning side of the relation if necessary
-        if ($pilot === null && $this->pilot !== null) {
-            $this->pilot->setFkCar(null);
-        }
+        return $this->isBroken;
+    }
 
+    public function setIsBroken(bool $isBroken): self
+    {
+        $this->isBroken = $isBroken;
+
+        return $this;
+    }
+
+    public function setPilot(Pilot $pilot): self
+    {
         // set the owning side of the relation if necessary
-        if ($pilot !== null && $pilot->getFkCar() !== $this) {
-            $pilot->setFkCar($this);
+        if ($pilot->getCar() !== $this) {
+            $pilot->setCar($this);
         }
 
         $this->pilot = $pilot;

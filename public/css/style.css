@@ -1,3 +1,13 @@
 body {
-    background-color: aquamarine;
+    margin: auto 0;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    padding: 5px;
+    border-radius: 5px;
 }

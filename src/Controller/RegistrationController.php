@@ -36,11 +36,12 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('zob_pilot');
+            return $this->redirectToRoute('/home');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'error' => 'an error has occured... Please, try again later...'
         ]);
     }
 }

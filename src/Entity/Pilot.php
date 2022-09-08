@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PilotRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -51,11 +53,6 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
     private $photogenicSkills;
 
     /**
-     * @ORM\OneToOne(targetEntity=Participation::class, mappedBy="pilots", cascade={"persist", "remove"})
-     */
-    private $participation;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $avatar;
@@ -66,9 +63,22 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
     private $wallet;
 
     /**
-     * @ORM\OneToOne(targetEntity=Car::class, inversedBy="pilot", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Championship::class, mappedBy="pilots")
      */
-    private $fkCar;
+    private $championships;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Car::class, inversedBy="pilot", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $car;
+
+    public function __construct()
+    {
+        $this->championships = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -190,23 +200,6 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getParticipation(): ?Participation
-    {
-        return $this->participation;
-    }
-
-    public function setParticipation(Participation $participation): self
-    {
-        // set the owning side of the relation if necessary
-        if ($participation->getPilots() !== $this) {
-            $participation->setPilots($this);
-        }
-
-        $this->participation = $participation;
-
-        return $this;
-    }
-
     public function getAvatar(): ?string
     {
         return $this->avatar;
@@ -231,14 +224,44 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFkCar(): ?Car
+    /**
+     * @return Collection<int, Championship>
+     */
+    public function getChampionships(): Collection
     {
-        return $this->fkCar;
+        return $this->championships;
     }
 
-    public function setFkCar(?Car $fkCar): self
+    public function addChampionship(Championship $championship): self
     {
-        $this->fkCar = $fkCar;
+        if (!$this->championships->contains($championship)) {
+            $this->championships[] = $championship;
+            $championship->setPilots($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChampionship(Championship $championship): self
+    {
+        if ($this->championships->removeElement($championship)) {
+            // set the owning side to null (unless already changed)
+            if ($championship->getPilots() === $this) {
+                $championship->setPilots(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCar(): ?Car
+    {
+        return $this->car;
+    }
+
+    public function setCar(Car $car): self
+    {
+        $this->car = $car;
 
         return $this;
     }
