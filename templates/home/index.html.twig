@@ -11,6 +11,32 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Liste des courses</th>
+            </tr>
+            <tr>
+                <th>id</th>
+                <th>date</th>
+                <th>name</th>
+                <th>length</th>
+                <th>city</th>
+                <th>difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for race in races %}
+                <tr>
+                    <td>{{ race.id }}</td>
+                    <td>{{ race.date | date('d\m\Y') }}</td>
+                    <td>{{ race.name }}</td>
+                    <td>{{ race.length }}</td>
+                    <td>{{ race.city }}</td>
+                    <td>{{ race.difficulty }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

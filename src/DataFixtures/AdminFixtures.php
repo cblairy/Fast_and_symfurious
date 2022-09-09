@@ -28,4 +28,5 @@ class AdminFixtures extends Fixture
 
         $manager->flush();
     }
+
 }

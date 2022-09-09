@@ -39,6 +39,20 @@ class RaceRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+    * @return Race[] Returns an array of Race objects
+    */
+    public function findByDateTime($dateTime): Response
+    {
+        $repo = $this->getDoctrine()->getRepository(Race::class);
+
+        $races = $repo->findBy(
+            ['date' => new \DateTime > new \Datetime("2010-05-15 16:00:00")]
+
+        if($races)
+        );
+    }
+
 //    /**
 //     * @return Race[] Returns an array of Race objects
 //     */

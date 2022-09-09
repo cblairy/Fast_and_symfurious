@@ -11,3 +11,7 @@ body {
     padding: 5px;
     border-radius: 5px;
 }
+
+td {
+    padding:5px;
+}
