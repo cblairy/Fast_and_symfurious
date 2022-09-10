@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Race;
 use App\Repository\RaceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,17 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="app_home")
+     * @Route("/home", name="app_home_index")
      */
-    public function index(): Response
+    public function index(RaceRepository $raceRepository): Response
     {
-        $repo = $this->getDoctrine()->getRepository(Race::class);
-
-
-        $races = $repo->findBy(
-            ['date' => new \DateTime > new \Datetime("2010-05-15 16:00:00")]
+        $raceRepository->findByDateTime();
+        $races = $raceRepository->findBy(
+            ['date' => new \DateTime()]
         );
-        dd($races);
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'races' => $races,
