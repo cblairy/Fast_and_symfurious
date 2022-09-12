@@ -27,19 +27,39 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Home
+                            <a class="nav-link active" href="/home">Home
                                 <span class="visually-hidden">(current)</span>
                             </a>
                         </li>
+
+                        {% if is_granted("ROLE_ADMIN") %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="/admin">Admin</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
+                            <a class="nav-link" href="/logout">Logout</a>
                         </li>
+                        
+                        {% elseif is_granted("ROLE_ADMIN") %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>
+                        {% endif %}
+                        
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-sm-2" type="text" placeholder="Search">

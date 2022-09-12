@@ -28,7 +28,7 @@ class PilotFixtures extends Fixture
 
             $pilot = new Pilot();
             $pilot->setUsername("pilot n°$i")
-                ->setRoles(["0" => "user"])
+                ->setRoles(["0" => "ROLE_USER"])
                 ->setPassword("$i$i$i$i")
                 ->setNationality("nationality n°$i")
                 ->setDrivingSkills($i*2)

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Race;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @extends ServiceEntityRepository<Race>
@@ -42,14 +43,13 @@ class RaceRepository extends ServiceEntityRepository
     public function findByDateTime(): array
     {
         return $this->createQueryBuilder('r')
-            ->addCriteria(
-                Criteria::create()->andWhere(
-                    Criteria::expr()->eq('r.date', new DateTime('now'))
-                )
-            )
-            ->getQuery()
-            ->getResult()
-            ;
+                    ->addCriteria(
+                        Criteria::create()->andWhere(
+                        Criteria::expr()->lt('r.date', new \DateTime('now'))
+                        )
+                    )
+                    ->getQuery()
+                    ->getResult();
     }
 
 //    /**

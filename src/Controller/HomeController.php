@@ -14,14 +14,14 @@ class HomeController extends AbstractController
      */
     public function index(RaceRepository $raceRepository): Response
     {
-        $raceRepository->findByDateTime();
+        $race = $raceRepository->findByDateTime();
         $races = $raceRepository->findBy(
-            ['date' => new \DateTime()]
+            ['date' => new \DateTime("2022-09-08")]
         );
-
+            dd($race);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'races' => $races,
+            'races' => $raceRepository,
         ]);
     }
 

@@ -35,8 +35,17 @@
                     <td>{{ race.city }}</td>
                     <td>{{ race.difficulty }}</td>
                 </tr>
+            {% else %}
+            Unluck, t'es une merde
             {% endfor %}
         </tbody>
     </table>
 </div>
+{% if is_granted("ROLE_USER") %}
+    <a href="{{ path("app_logout") }}">Logout</a>
+    {% else %}
+        <a href="{{ path("app_login") }}">Login</a>
+        <a href="{{ path("app_register") }}">Register</a>
+
+{% endif %}
 {% endblock %}
