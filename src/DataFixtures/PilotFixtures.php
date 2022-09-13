@@ -35,7 +35,8 @@ class PilotFixtures extends Fixture
                 ->setPhotogenicSkills($i*3)
                 ->setAvatar("http://placehold.it/100x150")
                 ->setWallet("$i"*2000)
-                ->setCar($car);
+                ->setCar($car)
+                ->setIsRegister(false);
 
             $manager->persist($pilot);
 

@@ -73,6 +73,11 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $car;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isRegister;
+
     public function __construct()
     {
         $this->championships = new ArrayCollection();
@@ -262,6 +267,18 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCar(Car $car): self
     {
         $this->car = $car;
+
+        return $this;
+    }
+
+    public function getIsRegister(): ?bool
+    {
+        return $this->isAdmin;
+    }
+
+    public function setIsRegister(bool $isRegister): self
+    {
+        $this->isRegister = $isRegister;
 
         return $this;
     }

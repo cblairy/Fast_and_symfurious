@@ -40,7 +40,7 @@ class RaceRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByDateTime(): array
+    public function findByRacesDone(): array
     {
         return $this->createQueryBuilder('r')
                     ->addCriteria(
@@ -50,6 +50,42 @@ class RaceRepository extends ServiceEntityRepository
                     )
                     ->getQuery()
                     ->getResult();
+    }
+
+    public function findByNextRaces(): array
+    {
+        return $this->createQueryBuilder('r')
+                    ->addCriteria(
+                        Criteria::create()->andWhere(
+                        Criteria::expr()->gt('r.date', new \DateTime('now'))
+                        )
+                    )
+                    ->getQuery()
+                    ->getResult();
+    }
+
+    public function findLastRace(): array
+    {
+        return $this->createQueryBuilder('r')
+                    ->addCriteria(
+                        Criteria::create()->andWhere(
+                        Criteria::expr()->
+                        )
+                    )
+                    ->getQuery()
+                    ->getResult();
+
+
+                    $sql = '
+                    SELECT * 
+                    FROM race 
+                    WHERE date = ( 
+                        SELECT MAX(date) 
+                        FROM race 
+                        WHERE date < NOW()
+                    )';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute()
     }
 
 //    /**

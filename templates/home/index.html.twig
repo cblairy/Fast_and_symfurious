@@ -7,14 +7,14 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+    <h1>Hello ! ✅</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="races_done">
 
     <table>
         <thead>
             <tr>
-                <th colspan="2">Liste des courses</th>
+                <th colspan="6">Races done ✅</th>
             </tr>
             <tr>
                 <th>id</th>
@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for race in races %}
+            {% for race in racesDone %}
                 <tr>
                     <td>{{ race.id }}</td>
                     <td>{{ race.date | date('d\m\Y') }}</td>
@@ -35,6 +35,67 @@
                     <td>{{ race.city }}</td>
                     <td>{{ race.difficulty }}</td>
                 </tr>
+            {% else %}
+            Unluck, t'es une merde
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+<div class="next_races">
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="6">Next races</th>
+            </tr>
+            <tr>
+                <th>id</th>
+                <th>date</th>
+                <th>name</th>
+                <th>length</th>
+                <th>city</th>
+                <th>difficulty</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for race in nextRaces %}
+                <tr>
+                    <td>{{ race.id }}</td>
+                    <td>{{ race.date | date('d\m\Y') }}</td>
+                    <td>{{ race.name }}</td>
+                    <td>{{ race.length }}</td>
+                    <td>{{ race.city }}</td>
+                    <td>{{ race.difficulty }}</td>
+                </tr>
+            {% else %}
+            Unluck, t'es une merde
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+<div class="Ranking">
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">Ranking</th>
+            </tr>
+            <tr>
+                <th>name</th>
+                <th>Rank</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rank in ranking %}
+                <tr>
+                    <td>{{ rank.pilots.username }}</td>
+                    <td>{{ i }}</td>
+                    <td>{{ rank.score }}</td>
+                </tr>
+                {% set i = i+1 %}
             {% else %}
             Unluck, t'es une merde
             {% endfor %}

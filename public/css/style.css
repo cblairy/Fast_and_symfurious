@@ -12,6 +12,11 @@ body {
     border-radius: 5px;
 }
 
-td {
-    padding:5px;
+table, td, th {
+    border: solid 1px white;
+}
+
+table * {
+    padding: 8px;
+    text-align: center;
 }

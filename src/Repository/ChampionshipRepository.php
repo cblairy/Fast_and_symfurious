@@ -39,6 +39,14 @@ class ChampionshipRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByPilotId($pilotId)
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+        ->where('p.pilots = 106')
+        ->orderBy('p.score', 'DESC');
+
+        return $queryBuilder->getQuery()->execute();
+    }
 //    /**
 //     * @return Championship[] Returns an array of Championship objects
 //     */
