@@ -74,6 +74,10 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
     private $car;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $carId;
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isRegister;
@@ -83,7 +87,9 @@ class Pilot implements UserInterface, PasswordAuthenticatedUserInterface
         $this->championships = new ArrayCollection();
     }
 
-
+    public function getCarId() {
+        return 1;
+    }
 
     public function getId(): ?int
     {

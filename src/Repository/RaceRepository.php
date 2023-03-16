@@ -67,11 +67,7 @@ class RaceRepository extends ServiceEntityRepository
     public function findLastRace(): array
     {
         return $this->createQueryBuilder('r')
-                    ->addCriteria(
-                        Criteria::create()->andWhere(
-                        Criteria::expr()->
-                        )
-                    )
+
                     ->getQuery()
                     ->getResult();
 
@@ -85,7 +81,7 @@ class RaceRepository extends ServiceEntityRepository
                         WHERE date < NOW()
                     )';
                     $stmt = $conn->prepare($sql);
-                    $stmt->execute()
+                    $stmt->execute();
     }
 
 //    /**
